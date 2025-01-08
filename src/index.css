@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'BYekan';
+  src: url('/fonts/BYekan') format('tff'),
+  url('/fonts/BYekan.tff') format('tff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'BYekan', sans-serif;
+  direction: rtl;
+  background-color: #212121; /* Dark background */
+  color: #fff !important; /* White text */
+  margin: 0;
+  padding: 0;
+}
