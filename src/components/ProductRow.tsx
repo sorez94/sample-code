@@ -39,8 +39,8 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, handleInputChange, han
                     value={product.name}
                     onChange={(e) => handleInputChange(product.id, "name", e.target.value)}
                     variant="standard"
-                    style={{ backgroundColor: "#444", borderRadius: "5px", color: "#fff", width: "100%" }}
-                    inputProps={{ style: { color: "#fff", textAlign: "center" } }}
+                    style={{ backgroundColor: "rgb(37 34 34)", borderRadius: "5px", color: "#fff", width: "100%"}}
+                    inputProps={{ style: { color: "#fff", textAlign: "center", height: "50px" } }}
                 />
             </TableCell>
             <TableCell align="center">
@@ -81,8 +81,8 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, handleInputChange, han
                     onChange={(e) => handleNumberInputChange(product.id, "unitPrice", e.target.value)}
                     type="text"
                     variant="standard"
-                    style={{ backgroundColor: "#444", borderRadius: "5px", color: "#fff", width: "100%" }}
-                    inputProps={{ style: { color: "#fff", textAlign: "center" } }}
+                    style={{ backgroundColor: "rgb(37 34 34)", borderRadius: "5px", color: "#fff", width: "100%" }}
+                    inputProps={{ style: { color: "#fff", textAlign: "center",  height: "50px" } }}
                 />
             </TableCell>
             <TableCell align="center">
@@ -91,8 +91,8 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, handleInputChange, han
                     onChange={(e) => handleNumberInputChange(product.id, "discount", e.target.value)}
                     type="text"
                     variant="standard"
-                    style={{ backgroundColor: "#444", borderRadius: "5px", color: "limegreen", width: "100%" }}
-                    inputProps={{ style: { color: "limegreen", textAlign: "center" } }}
+                    style={{ backgroundColor: "rgb(37 34 34)", borderRadius: "5px", color: "#30F100", width: "100%" }}
+                    inputProps={{ style: { color: "#30F10", textAlign: "center",  height: "50px"} }}
                 />
             </TableCell>
             <TableCell align="center" style={{ color: "white", fontSize: "1.2rem" }}>
