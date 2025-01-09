@@ -92,7 +92,7 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, handleInputChange, han
                     type="text"
                     variant="standard"
                     style={{ backgroundColor: "rgb(37 34 34)", borderRadius: "5px", color: "#30F100", width: "100%" }}
-                    inputProps={{ style: { color: "#30F10", textAlign: "center",  height: "50px"} }}
+                    inputProps={{ style: { color: "#30F100", textAlign: "center",  height: "50px"} }}
                 />
             </TableCell>
             <TableCell align="center" style={{ color: "white", fontSize: "1.2rem" }}>
