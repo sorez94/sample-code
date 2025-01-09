@@ -1,5 +1,15 @@
 import {useState} from "react";
-import {Container, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,} from "@mui/material";
+import {
+    Container,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography,
+} from "@mui/material";
 import {Form, Formik} from "formik";
 import * as Yup from "yup";
 import InputField from "./components/InputField.tsx";
@@ -8,41 +18,41 @@ import ProductRow from "./components/ProductRow.tsx";
 const App = () => {
     const [products, setProducts] = useState([
         {id: 1, name: "محصول یک", count: 0, unitPrice: 120000, discount: 10000, added: false},
-        {id: 2, name: "محصول دو", count: 1, unitPrice: 130000, discount: 7000, added: false},
-        {id: 3, name: "محصول چهار", count: 2, unitPrice: 140000, discount: 8200, added: false},
-        {id: 4, name: "محصول پنج", count: 2, unitPrice: 150000, discount: 8500, added: true},
-        {id: 5, name: "محصول شش", count: 2, unitPrice: 160000, discount: 8500, added: false},
+        {id: 2, name: "محصول دو", count: 0, unitPrice: 130000, discount: 7000, added: false},
+        {id: 3, name: "محصول چهار", count: 0, unitPrice: 140000, discount: 8200, added: false},
+        {id: 4, name: "محصول پنج", count: 0, unitPrice: 150000, discount: 8500, added: false},
+        {id: 5, name: "محصول شش", count: 0, unitPrice: 160000, discount: 8500, added: false},
     ]);
 
     const validationSchema = Yup.object({
         buyerName: Yup.string().required("نام خریدار الزامی است"),
         mobile: Yup.string()
-            .matches(/^91\d{8}$/, "شماره موبایل باید به صورت 9190719287 باشد")
+            .matches(/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/, "شماره موبایل باید به صورت 9190719287 باشد")
             .required("موبایل الزامی است"),
         address: Yup.string().required("آدرس الزامی است"),
     });
 
-    const handleInputChange = (id:number, field: string, value:any) => {
+    const handleInputChange = (id: number, field: string, value: any) => {
         setProducts(prev => prev.map(product => product.id === id ? {...product, [field]: value} : product));
     };
 
-    const handleAdd = (id:number) => {
+    const handleAdd = (id: number) => {
         setProducts(prev => prev.map(product => product.id === id ? {...product, count: product.count + 1} : product));
     };
 
-    const handleRemove = (id:number) => {
+    const handleRemove = (id: number) => {
         setProducts(prev => prev.map(product => product.id === id && product.count > 0 ? {
             ...product,
             count: product.count - 1
         } : product));
     };
 
-    const toggleAddButton = (id:number) => {
+    const toggleAddButton = (id: number) => {
         setProducts(prev => prev.map(product => product.id === id ? {...product, added: !product.added} : product));
     };
 
     return (
-        <Container maxWidth="lg" style={{marginTop: "30px", color: "#fff"}}>
+        <Container maxWidth="xl" style={{marginTop: "30px", color: "#fff"}}>
             <Formik
                 initialValues={{buyerName: "", mobile: "", address: ""}}
                 validationSchema={validationSchema}
@@ -110,6 +120,10 @@ const App = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <div style={{display: 'flex', justifyContent: 'end', alignItems: 'center', marginTop: '30px'}}>
+                <Typography style={{margin: '10px 50px', padding: 10, fontSize: 20, fontWeight: 'bold'}}> قیمت نهایی </Typography>
+                <Typography style={{border: '1px solid #0073A4', margin: '10px 0px', padding: '10px 60px' , borderRadius: 15, fontSize: 20, fontWeight: 'bold'}}> {products.map(product => (product.unitPrice - product.discount) * product.count).reduce((a, sum) => a + sum, 0)} </Typography>
+            </div>
         </Container>
     );
 };
