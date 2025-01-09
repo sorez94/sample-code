@@ -121,8 +121,16 @@ const App = () => {
                 </Table>
             </TableContainer>
             <div style={{display: 'flex', justifyContent: 'end', alignItems: 'center', marginTop: '30px'}}>
-                <Typography style={{margin: '10px 50px', padding: 10, fontSize: 20, fontWeight: 'bold'}}> قیمت نهایی </Typography>
-                <Typography style={{border: '1px solid #0073A4', margin: '10px 0px', padding: '10px 60px' , borderRadius: 15, fontSize: 20, fontWeight: 'bold'}}> {products.map(product => (product.unitPrice - product.discount) * product.count).reduce((a, sum) => a + sum, 0)} </Typography>
+                <Typography style={{margin: '10px 50px', padding: 10, fontSize: 20, fontWeight: 'bold'}}> قیمت
+                    نهایی </Typography>
+                <Typography style={{
+                    border: '1px solid #0073A4',
+                    margin: '10px 0px',
+                    padding: '10px 60px',
+                    borderRadius: 15,
+                    fontSize: 20,
+                    fontWeight: 'bold'
+                }}> {products.filter(f => f.added).map(product => (product.unitPrice - product.discount) * product.count).reduce((a, sum) => a + sum, 0)} </Typography>
             </div>
         </Container>
     );
