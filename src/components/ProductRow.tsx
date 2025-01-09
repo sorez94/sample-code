@@ -4,7 +4,6 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-// Type definition for the product object
 interface Product {
     id: number;
     name: string;
@@ -14,7 +13,6 @@ interface Product {
     added: boolean;
 }
 
-// Type definition for the props passed to the ProductRow component
 interface ProductRowProps {
     product: Product;
     handleInputChange: (id: number, field: string, value: any) => void;
@@ -24,6 +22,16 @@ interface ProductRowProps {
 }
 
 const ProductRow: React.FC<ProductRowProps> = ({ product, handleInputChange, handleAdd, handleRemove, toggleAddButton }) => {
+    // Helper function to format numbers with commas
+    const formatNumber = (num: number) => num.toLocaleString();
+
+    // Helper function to handle input change for number fields
+    const handleNumberInputChange = (id: number, field: string, value: string) => {
+        // Remove commas and handle the conversion to number
+        const parsedValue = parseInt(value.replace(/,/g, ''), 10) || 0;
+        handleInputChange(id, field, parsedValue);
+    };
+
     return (
         <TableRow key={product.id}>
             <TableCell align="right">
@@ -51,7 +59,7 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, handleInputChange, han
                     </div>
                     <div style={{ width: "30px", textAlign: "center" }}>
                         <Typography variant="body1" style={{ color: "#fff", textAlign: "center", fontSize: "1.2rem" }}>
-                            {product.count}
+                            {formatNumber(product.count)}
                         </Typography>
                     </div>
                     <div style={{ width: "30px", textAlign: "center" }}>
@@ -69,9 +77,9 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, handleInputChange, han
             </TableCell>
             <TableCell align="center">
                 <TextField
-                    value={product.unitPrice}
-                    onChange={(e) => handleInputChange(product.id, "unitPrice", parseInt(e.target.value) || 0)}
-                    type="number"
+                    value={formatNumber(product.unitPrice)} // Display formatted number
+                    onChange={(e) => handleNumberInputChange(product.id, "unitPrice", e.target.value)}
+                    type="text"
                     variant="standard"
                     style={{ backgroundColor: "#444", borderRadius: "5px", color: "#fff", width: "100%" }}
                     inputProps={{ style: { color: "#fff", textAlign: "center" } }}
@@ -79,16 +87,16 @@ const ProductRow: React.FC<ProductRowProps> = ({ product, handleInputChange, han
             </TableCell>
             <TableCell align="center">
                 <TextField
-                    value={product.discount}
-                    onChange={(e) => handleInputChange(product.id, "discount", parseInt(e.target.value) || 0)}
-                    type="number"
+                    value={formatNumber(product.discount)} // Display formatted number
+                    onChange={(e) => handleNumberInputChange(product.id, "discount", e.target.value)}
+                    type="text"
                     variant="standard"
                     style={{ backgroundColor: "#444", borderRadius: "5px", color: "limegreen", width: "100%" }}
                     inputProps={{ style: { color: "limegreen", textAlign: "center" } }}
                 />
             </TableCell>
             <TableCell align="center" style={{ color: "white", fontSize: "1.2rem" }}>
-                {((product.unitPrice - product.discount) * product.count).toLocaleString()}
+                {formatNumber((product.unitPrice - product.discount) * product.count)}
             </TableCell>
             <TableCell align="center">
                 <Button
