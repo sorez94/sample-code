@@ -130,7 +130,10 @@ const App = () => {
                     borderRadius: 15,
                     fontSize: 20,
                     fontWeight: 'bold'
-                }}> {products.filter(f => f.added).map(product => (product.unitPrice - product.discount) * product.count).reduce((a, sum) => a + sum, 0)} </Typography>
+                }}> {products.filter(f => f.added)
+                    .map(product => (product.unitPrice - product.discount) * product.count)
+                    .reduce((a, sum) => a + sum, 0)
+                    .toLocaleString()} </Typography>
             </div>
         </Container>
     );
